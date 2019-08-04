@@ -39,3 +39,35 @@ function displayProductDetails() {
       connection.end();
     });
   }
+
+  //This function provides users option to provide the item and quantity they want to purchase
+
+  function userPrompt(){
+
+    inquirer
+    .prompt([
+        {
+            name: "itemID",
+            type: "input",
+            message: "Enter the id of the product you want to purchase"
+        },
+        {
+            name: "Quantity",
+            type: "input",
+            message: "How many quantity would you like to purchase? "
+        },
+    ]).then(function(answer){
+        //based on the users choices, check the product quantity available for sale
+        connection.query("SELECT item_id, product_name, price, stcok_quantity FROM products WHERE ?"
+        , {item_id: answer.itemID}, function(err, res) {
+            if(err) throw err;
+            if(answer.Quantity > res[0].stock_quantity){
+                console.log("Insufficient quantity !!!");
+            } else {
+                var curStock = res[0].stock_quantity - answer.Quantity;
+                var totalCost = res[0].price * answer.Quantity;
+                var product_sales = res[0].product_sales + parseInt(totalCost);
+            }
+        })
+    })
+  }
