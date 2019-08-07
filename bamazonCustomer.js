@@ -21,7 +21,7 @@ connection.connect(function(err){
 function displayProductDetails() {
     //Declaration of CLI table with column names
     var table = new Table ({
-        head: ['item_id', 'product_name', 'department_name', 'price', 'stock_quantity','product_sales'],
+        head: ['Item_id', 'Product_Name', 'Department', 'Price', 'Stock','Product_Sales'],
         colWidths: [10, 20, 20, 10, 10, 20]
     });
 
@@ -32,7 +32,7 @@ function displayProductDetails() {
         
       //For each record 
       for(var i=0; i<res.length; i++){
-          table.push([res[i].item_id, res[i].product_name, res[i].department_name, res[i].price, res[i].stock_quantity])
+          table.push([res[i].item_id, res[i].product_name, res[i].department_name, res[i].price, res[i].stock_quantity, res[i].product_sales]);
       }
       // Log all results of the SELECT statement
       console.log(table.toString());
@@ -58,10 +58,10 @@ function displayProductDetails() {
 
     ]).then(function (answer) {
         //based on the suer inputs obtained, run the select query on products1 table.
-        connection.query("SELECT item_id,price,stock_quantity FROM products WHERE ?", { item_id: answer.itemID }, function (err, res) {
+        connection.query("SELECT item_id, price, stock_quantity, product_sales FROM products WHERE ?", { item_id: answer.itemID }, function (err, res) {
             if(err) throw err;
             //If quantity required by user is more than the quantity in the DB,display insufficient quantity
-            if (answer.Quantity > res[0].stock_quantity) {
+            else if (answer.Quantity > res[0].stock_quantity) {
 
                 console.log("Insufficient quantity!");
 
@@ -75,11 +75,11 @@ function displayProductDetails() {
                 //Total product sales is equal to existing product sales plus the total cost
                 var product_sales = res[0].product_sales + parseInt(totalCost);
                 // Update the stock and product sales values in the DB
-                var upQuery = "update product set stock_quantity = " + curStock + " where item_id = " + answer.itemID;
+                var upQuery = "update product set stock_quantity = " + curStock + ", product_sales = " + product_sales + " where item_id = " + answer.itemID;
                 // Execute the query and update the DB.Display the totoal cose to customer and also a success message, otherwise display error
                 connection.query(upQuery, function (err, res) {
                     if (err) {
-                        console.log("Error");
+                        console.log("Error" + res);
                     }
                     else {
                         console.log("Your total Purchase Price is:" + totalCost);
