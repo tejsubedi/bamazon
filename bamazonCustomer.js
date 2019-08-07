@@ -36,38 +36,73 @@ function displayProductDetails() {
       }
       // Log all results of the SELECT statement
       console.log(table.toString());
-      connection.end();
+      runAction();
     });
   }
 
   //This function provides users option to provide the item and quantity they want to purchase
 
-  function userPrompt(){
+  function runAction() {
 
-    inquirer
-    .prompt([
+    inquirer.prompt([
         {
             name: "itemID",
             type: "input",
-            message: "Enter the id of the product you want to purchase"
+            message: "Enter the id of the product you want to purchase:",
         },
         {
             name: "Quantity",
             type: "input",
-            message: "How many quantity would you like to purchase? "
+            message: "Enter the quantity of the product to purchase:"
         },
-    ]).then(function(answer){
-        //based on the users choices, check the product quantity available for sale
-        connection.query("SELECT item_id, product_name, price, stcok_quantity FROM products WHERE ?"
-        , {item_id: answer.itemID}, function(err, res) {
+
+    ]).then(function (answer) {
+        //based on the suer inputs obtained, run the select query on products1 table.
+        connection.query("SELECT item_id,price,stock_quantity FROM products WHERE ?", { item_id: answer.itemID }, function (err, res) {
             if(err) throw err;
-            if(answer.Quantity > res[0].stock_quantity){
-                console.log("Insufficient quantity !!!");
-            } else {
-                var curStock = res[0].stock_quantity - answer.Quantity;
-                var totalCost = res[0].price * answer.Quantity;
-                var product_sales = res[0].product_sales + parseInt(totalCost);
+            //If quantity required by user is more than the quantity in the DB,display insufficient quantity
+            if (answer.Quantity > res[0].stock_quantity) {
+
+                console.log("Insufficient quantity!");
+
             }
-        })
-    })
-  }
+            // Otherwise, update the existing stock by substracting the user requeted stock and also the product sales value 
+            else {
+                // Current stock is equal to existing stock - stock requested
+                var curStock = res[0].stock_quantity - answer.Quantity;
+                // totalCost to customer is price of 1 item multiplied by quantity requested
+                var totalCost = res[0].price * answer.Quantity;
+                //Total product sales is equal to existing product sales plus the total cost
+                var product_sales = res[0].product_sales + parseInt(totalCost);
+                // Update the stock and product sales values in the DB
+                var upQuery = "update product set stock_quantity = " + curStock + " where item_id = " + answer.itemID;
+                // Execute the query and update the DB.Display the totoal cose to customer and also a success message, otherwise display error
+                connection.query(upQuery, function (err, res) {
+                    if (err) {
+                        console.log("Error");
+                    }
+                    else {
+                        console.log("Your total Purchase Price is:" + totalCost);
+                        console.log("Received order successfully:");
+                        //Prompt the customer if they want to continue shopping or  quit. If the respons is yes, display the product again.Else Say Good bye
+                        inquirer.prompt([
+                            {
+                                name: "continue",
+                                type: "Confirm",
+                                message: "Do you want to continue Shopping?(Y/N):",
+                            }
+                        ]).then(function (response) {
+                            if (response.continue === 'Y')
+                                displayProductDetails();
+                            else {
+                                console.log("Good Bye.See you soon");
+                                return;
+                            }
+                        });
+                    }
+                });
+            }
+        });
+
+    });
+}
