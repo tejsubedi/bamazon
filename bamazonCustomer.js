@@ -75,7 +75,7 @@ function displayProductDetails() {
                 //Total product sales is equal to existing product sales plus the total cost
                 var product_sales = res[0].product_sales + parseInt(totalCost);
                 // Update the stock and product sales values in the DB
-                var upQuery = "update product set stock_quantity = " + curStock + ", product_sales = " + product_sales + " where item_id = " + answer.itemID;
+                var upQuery = "update products set stock_quantity = " + curStock + ", product_sales = " + product_sales + " where item_id = " + answer.itemID;
                 // Execute the query and update the DB.Display the totoal cose to customer and also a success message, otherwise display error
                 connection.query(upQuery, function (err, res) {
                     if (err) {
