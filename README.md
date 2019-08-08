@@ -25,6 +25,9 @@ This project is about to get more familiar with the MySql database where we can 
 
 * Running this application will first display all of the items available for sale. Include the ids, names, and prices of products for sale.
 
+* The first should ask them the ID of the product they would like to buy.
+* The second message should ask how many units of the product they would like to buy.
+
 #Image -1
 ![](images/bamazonCustomer-1.png)
 
@@ -34,10 +37,15 @@ This project is about to get more familiar with the MySql database where we can 
 #Image -3
 ![](images/bamazonCustomer-3.png)
 
-**2.`node bamazonCustomer.js` will genereate in terminal**
+**2.`node bamazonManager.js` will genereate in terminal**
 
-* Running this application will first display all of the items available for sale. Include the ids, names, and prices of products for sale.
+* Running this application will:
+    * List a set of menu options
+    * View Products for Sale
+    * View Low Inventory
+    * Add to Inventory
+    * Add New Product
 
-#Image
-![](images/bamazonCustomer-1.png)
+#Image -1 
+![](images/bamazonManager-1.png)
 
