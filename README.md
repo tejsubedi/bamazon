@@ -21,11 +21,23 @@ This project is about to get more familiar with the MySql database where we can 
 
 ## What each command should do 
 
-**1.`node bamazonCustomer.j` will genereate in terminal**
+**1.`node bamazonCustomer.js` will genereate in terminal**
+
+* Running this application will first display all of the items available for sale. Include the ids, names, and prices of products for sale.
+
+#Image -1
+![](images/bamazonCustomer-1.png)
+
+#Image -2
+![](images/bamazonCustomer-2.png)
+
+#Image -3
+![](images/bamazonCustomer-3.png)
+
+**2.`node bamazonCustomer.js` will genereate in terminal**
 
 * Running this application will first display all of the items available for sale. Include the ids, names, and prices of products for sale.
 
 #Image
 ![](images/bamazonCustomer-1.png)
-
 
