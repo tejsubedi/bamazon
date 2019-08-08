@@ -1,10 +1,10 @@
 # bamazon
 
 # Packages added to the file
-**install the npm mysql for database**
-**install the npm inquirer for prompt the message**
-**install the npm cli-table for table head in console**
-**added .gitignore file**
+ **install the npm mysql for database**
+ **install the npm inquirer for prompt the message**
+ **install the npm cli-table for table head in console**
+ **added .gitignore file**
 
 # Purpose of this project
 
