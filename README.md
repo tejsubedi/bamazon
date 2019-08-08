@@ -47,16 +47,21 @@ This project is about to get more familiar with the MySql database where we can 
     * Add New Product
 
 #Image -1 
+* List a set of menu options
 ![](images/bamazonManager-1.png)
 
-#Image -2 
+#Image -2
+* View Products for Sale 
 ![](images/bamazonManager-2.png)
 
 #Image -3 
+* View Low Inventory
 ![](images/bamazonManager-3.png)
 
 #Image -4 
+* Add to Inventory
 ![](images/bamazonManager-4.png)
 
 #Image -5 
+* Add New Product
 ![](images/bamazonManager-5.png)
