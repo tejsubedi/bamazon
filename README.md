@@ -49,3 +49,14 @@ This project is about to get more familiar with the MySql database where we can 
 #Image -1 
 ![](images/bamazonManager-1.png)
 
+#Image -2 
+![](images/bamazonManager-2.png)
+
+#Image -3 
+![](images/bamazonManager-3.png)
+
+#Image -4 
+![](images/bamazonManager-4.png)
+
+#Image -5 
+![](images/bamazonManager-5.png)
