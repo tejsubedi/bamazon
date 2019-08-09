@@ -73,8 +73,6 @@ function runAction() {
                 message: "Enter the overhead cost of the department:"
             }
         ]).then(function (newDept) {
-
-            //var newDeptId = newDept.DeptId;
             var newDeptName = newDept.DeptName;
             var newoverhead = newDept.Overhead_Cost;
 
